@@ -1,38 +1,32 @@
-import { BrowserRouter as Router, NavLink, Routes, Route } from "react-router-dom";
-import { ChessListPage } from "./ChessListPage";
-import { ChessSinglePage } from "./ChessSinglePage";
-import { ChessCreatePage } from "./ChessCreatePage";
-import { ChessModPage } from "./ChessModPage";
-import { ChessDelPage } from "./ChessDelPage";
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import {HajoLista} from './HajoLista';
+import {HajoReszletek} from './HajoReszletek';
+import {CsataResztvevok} from './CsataResztvevok';
 
-export const App=()=> {
+function App() {
   return (
     <Router>
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <NavLink to={'/'} className={({isActive}) => "nav-link" + (isActive ? "active" : "")}>
-                <span className="nav-link">Sakkozók</span>
-              </NavLink>
-              </li>
-              <li className="nav-item">
-              <NavLink to={'/new-chess'} className={({isActive}) => "nav-link" + (isActive ? "active" : "")}>
-                <span className="nav-link">Új sakkozó</span>
-              </NavLink>
-              </li>
-          </ul>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div className="container">
+          <div className="navbar-nav">
+            <Link className="nav-link" to="/">Csatahajók</Link>
+            <Link className="nav-link" to="/denmark-strait">A Denmark Strait csata</Link>
+          </div>
         </div>
       </nav>
-      <Routes>
-        <Route path="/" exact element={<ChessListPage />} />
-        <Route path="/chess/:chessId" exact element={<ChessSinglePage />} />
-        <Route path="/new-chess" exact element={<ChessCreatePage />} />
-        <Route path="/mod-chess/:chessId" exact element={<ChessModPage />} />
-        <Route path="/del-chess/:chessId" exact element={<ChessDelPage />} />
-      </Routes>
+
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<HajoLista />} />
+          <Route path="/hajo/:name" element={<HajoReszletek />} />
+          <Route path="/denmark-strait" element={<CsataResztvevok />} />
+        </Routes>
+      </div>
     </Router>
   );
 }
 
+export {App};
